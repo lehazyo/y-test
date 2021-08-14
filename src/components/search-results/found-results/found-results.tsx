@@ -1,19 +1,21 @@
 import React, { FC } from 'react';
 import { BookPreview } from '../../book-preview/book-preview';
-import { FoundResult } from './found-result';
+import { SearchFetchBook } from '../../../types/types';
+import { nanoid } from 'nanoid'
 
 export interface FoundResultsProps {
-  foundResults: FoundResult[];
+  foundResults: SearchFetchBook[];
 }
 
-export const FoundResults: FC<FoundResultsProps> = ({ foundResults }) => {
-  return (
-    <div className="found-results--wrapper">
-      {foundResults.map((result: FoundResult) => (
-        <BookPreview
-          title={result.title}
-        />
-      ))}
-    </div>
-  );
-};
+export const FoundResults: FC<FoundResultsProps> = ({ foundResults }) => (
+  <div className="found-results--wrapper">
+    {foundResults.map((result: SearchFetchBook) => (
+      <BookPreview
+        key={nanoid()}
+        title={result.title}
+        author_name={result.author_name}
+        cover_i={result.cover_i}
+      />
+    ))}
+  </div>
+);
