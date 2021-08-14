@@ -14,6 +14,7 @@ export interface SearchResultsState {
   previousSearch?: string;
   isSearching: boolean;
   foundResults: SearchFetchBook[];
+  totalResults: number;
 }
 
 export class SearchResults extends React.Component<SearchResultsProps, SearchResultsState> {
@@ -26,6 +27,7 @@ export class SearchResults extends React.Component<SearchResultsProps, SearchRes
       previousSearch: undefined,
       isSearching: false,
       foundResults: [],
+      totalResults: 0,
     };
   }
 
@@ -78,6 +80,7 @@ export class SearchResults extends React.Component<SearchResultsProps, SearchRes
     this.setState({
       isSearching: false,
       foundResults: data.docs,
+      totalResults: data.numFound,
     });
   }
 
@@ -90,7 +93,13 @@ export class SearchResults extends React.Component<SearchResultsProps, SearchRes
     }
     return (!this.state.foundResults.length)
       ? <NoResultsFound searchQuery={this.props.searchQuery} />
-      : <FoundResults searchQuery={this.props.searchQuery} foundResults={this.state.foundResults} />;
+      : (
+        <FoundResults
+          searchQuery={this.props.searchQuery}
+          foundResults={this.state.foundResults}
+          totalResults={this.state.totalResults}
+        />
+      );
   }
 
   render () {
