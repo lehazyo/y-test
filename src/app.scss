@@ -8,6 +8,10 @@ html, body {
   font-family: Arial, sans-serif;
 }
 
+body * {
+  box-sizing: border-box;
+}
+
 #root {
   height: 100%;
 }

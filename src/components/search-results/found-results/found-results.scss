@@ -1,0 +1,15 @@
+@import '../../../_palette.scss';
+
+.found-results--title {
+  margin-bottom: 20px;
+  color: $gray-mid;
+  font-size: 20px;
+  text-align: center;
+}
+
+.found-results--list {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 0;
+  list-style: none;
+}

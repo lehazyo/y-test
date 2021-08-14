@@ -1,0 +1,12 @@
+@import '../book-cover-common.scss';
+
+.book-cover-empty--wrapper {
+  background-color: $black-1;
+  border: 1px solid $black-1;
+}
+
+.book-cover-empty--icon {
+  width: 80%;
+  height: auto;
+  fill: $black-1;
+}

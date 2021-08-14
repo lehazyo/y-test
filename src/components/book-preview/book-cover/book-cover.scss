@@ -1,0 +1,34 @@
+@import './book-cover-common.scss';
+
+.book-cover {
+  &::before {
+    content: '';
+    visibility: hidden;
+    opacity: 0;
+  }
+}
+
+.book-cover_loading {
+  position: relative;
+  background: $black-1;
+  border: 1px solid $black-1;
+  &::before {
+    position: absolute;
+    visibility: visible;
+    width: 300%;
+    height: 20px;
+    margin-left: -40%;
+    box-shadow: 0 -30px 10px $white;
+    opacity: 1;
+    animation: loadingAnimation 2s linear infinite;
+  }
+}
+
+@keyframes loadingAnimation {
+  from {
+    transform: translateY(-200%) rotate(-10deg);
+  }
+  to {
+    transform: translateY(400%) rotate(-10deg);
+  }
+}

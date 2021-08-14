@@ -90,7 +90,7 @@ export class SearchResults extends React.Component<SearchResultsProps, SearchRes
     }
     return (!this.state.foundResults.length)
       ? <NoResultsFound searchQuery={this.props.searchQuery} />
-      : <FoundResults foundResults={this.state.foundResults} />;
+      : <FoundResults searchQuery={this.props.searchQuery} foundResults={this.state.foundResults} />;
   }
 
   render () {

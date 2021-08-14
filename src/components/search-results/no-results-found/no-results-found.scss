@@ -1,6 +1,7 @@
-@import '../../../palette';
+@import '../../../_palette';
 
 .no-results-found--wrapper {
   color: $gray-mid;
   font-size: 20px;
+  text-align: center;
 }
