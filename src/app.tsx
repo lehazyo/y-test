@@ -1,6 +1,6 @@
 import React from 'react';
-import { SearchBlock } from './components/search-block/search-block';
 import { SearchResults } from './components/search-results/search-results';
+import { TopBar } from './components/top-bar/top-bar';
 import './app.scss';
 
 interface IProps {}
@@ -27,8 +27,7 @@ export class App extends React.Component<IProps, IState> {
     return (
       <div className="app--wrapper">
         <div className="main-block--wrapper">
-          <h1 className="main-block--header">Литературбо</h1>
-          <SearchBlock performSearch={performSearch} />
+          <TopBar performSearch={performSearch} />
           <SearchResults searchQuery={this.state.searchQuery} />
         </div>
       </div>

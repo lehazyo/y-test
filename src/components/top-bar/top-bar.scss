@@ -1,0 +1,19 @@
+@import '../../_palette.scss';
+
+.top-bar--wrapper {
+  display: flex;
+  width: 100%;
+  padding: 20px 0 0 0;
+}
+
+.top-bar--title-wrapper {
+  display: flex;
+  align-items: center;
+  margin: 0 20px 0 0;
+}
+
+.top-bar--title {
+  flex-shrink: 0;
+  margin: 0;
+  font-size: 30px;
+}

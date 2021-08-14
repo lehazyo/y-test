@@ -29,12 +29,7 @@ body * {
   flex-grow: 1;
   align-items: flex-start;
   max-width: 90%;
-  padding: 12px 20px;
+  padding: 0 20px;
   background-color: $white; 
   box-shadow: 0 0 20px $black-1;
-}
-
-.main-block--header {
-  margin: 0 auto 20px auto;
-  font-size: 30px;
 }

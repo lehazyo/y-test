@@ -2,5 +2,6 @@
 
 .search-block--wrapper {
   display: flex;
-  width: 100%;
+  flex-grow: 1;
+  justify-content: flex-end;
 }
