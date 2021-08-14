@@ -4,6 +4,7 @@ import { NoResultsFound } from './no-results-found/no-results-found';
 import { FoundResults } from './found-results/found-results';
 import { SearchFetchBook, SearchFetchResults } from '../../types/types';
 import { SearchResultsLoader } from './search-results-loader/search-results-loader';
+import 'react-responsive-modal/styles.css';
 import './search-results.scss';
 
 export interface SearchResultsProps {
@@ -51,20 +52,19 @@ export class SearchResults extends React.Component<SearchResultsProps, SearchRes
       'author_name',
     ];
 
-    const sanitizedQuery = encodeURIComponent(rawQuery);
-    fetch(`http://openlibrary.org/search.json?fields=${neededFields.join(',')}&q=${sanitizedQuery}`)
-        .then(response => {
-          if (!response.ok) {
-            console.log('Response is not OK:', response.statusText);
-            throw new Error(response.statusText);
-          }
-          return response.json();
-        })
-        .then(data => this.parseSearchResults(data))
-        .catch(error => {
-          // throw new Error(error);
-          console.log('Caught error:', error);
-        });
+    const encodedQuery = encodeURIComponent(rawQuery);
+    const requestUrl = `http://openlibrary.org/search.json?fields=${neededFields.join(',')}&q=${encodedQuery}`;
+    fetch(requestUrl)
+      .then(response => {
+        if (!response.ok) {
+          throw new Error(response.statusText);
+        }
+        return response.json();
+      })
+      .then(data => this.parseSearchResults(data))
+      .catch(error => {
+        throw new Error(error);
+      });
   }
 
   checkSearchChanged() {
@@ -103,10 +103,6 @@ export class SearchResults extends React.Component<SearchResultsProps, SearchRes
   }
 
   render () {
-    return (
-      <section className="search-results--wrapper">
-        {this.selectBlockToRender()}
-      </section>
-    );
+    return <section className="search-results--wrapper">{this.selectBlockToRender()}</section>;
   }
 };

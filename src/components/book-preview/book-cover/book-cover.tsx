@@ -2,6 +2,7 @@ import React from 'react';
 import './book-cover.scss';
 
 export interface BookCoverProps {
+  title: string;
   cover_i: number;
 }
 
@@ -28,6 +29,7 @@ export class BookCover extends React.Component<BookCoverProps, BookCoverState> {
     return (
       <figure className={`book-cover book-cover--wrapper ${this.state.isLoading ? 'book-cover_loading' : ''}`}>
         <img
+          alt={`Обложка книги ${this.props.title}`}
           src={`http://covers.openlibrary.org/b/id/${this.props.cover_i}-S.jpg`}
           onLoad={() => this.imageHasLoaded()}
         />
