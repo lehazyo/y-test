@@ -1,4 +1,4 @@
-@import './book-cover-common.scss';
+@import '../book-cover-common.scss';
 
 .book-cover {
   &::before {
@@ -22,6 +22,16 @@
     opacity: 1;
     animation: loadingAnimation 2s linear infinite;
   }
+  &.book-cover_details {
+    &::before {
+      height: 40px;
+      box-shadow: 0 -60px 20px $white;
+    }
+  }
+}
+
+.book-cover--img {
+  max-width: 100%;
 }
 
 @keyframes loadingAnimation {

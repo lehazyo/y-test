@@ -1,4 +1,4 @@
-@import '../../../palette';
+@import '../../_palette.scss';
 
 .book-cover {
   display: flex;
@@ -9,4 +9,8 @@
   height: 55px;
   margin: 0;
   overflow: hidden;
+  &.book-cover_details {
+    width: 102px;
+    height: 144px;
+  }
 }

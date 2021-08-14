@@ -30,7 +30,7 @@ export class FoundResults extends React.Component<FoundResultsProps, FoundResult
     };
   }
 
-  openModalForBook(title: string, author_name: string[], cover_i?: number) {
+  openModalForBook(title: string, author_name: string[], cover?: number) {
     const encodedTitle = encodeURIComponent(title);
     const encodedAuthorBlock = (author_name !== undefined)
       ? `&author=${encodeURIComponent(author_name.join(','))}`
@@ -52,7 +52,7 @@ export class FoundResults extends React.Component<FoundResultsProps, FoundResult
         }
         return response.json();
       })
-      .then(data => this.parseDetails(data, title, author_name, cover_i))
+      .then(data => this.parseDetails(data, title, author_name, cover))
       .catch(error => {
         this.setState({
           isFetching: false,
@@ -64,19 +64,17 @@ export class FoundResults extends React.Component<FoundResultsProps, FoundResult
   parseDetails(
     data: DetailsFetchBook,
     title: string,
-    author_name: string[],
-    cover_i?: number,
+    authors: string[],
+    cover?: number,
   ) {
     this.setState({
       modalOpen: true,
       modalContent: (
         <BookDetails
           title={title}
-          author_name={author_name}
-          cover_i={cover_i}
-          publish_date={data.publish_date}
-          publisher={data.publisher}
-          isbn={data.isbn}
+          authors={authors}
+          cover={cover}
+          docs={data.docs}
         />
       ),
       isFetching: false,
@@ -102,8 +100,8 @@ export class FoundResults extends React.Component<FoundResultsProps, FoundResult
             <BookPreview
               key={nanoid()}
               title={result.title}
-              author_name={result.author_name}
-              cover_i={result.cover_i}
+              authors={result.author_name}
+              cover={result.cover_i}
               onClick={() => {
                 if (this.state.isFetching) {
                   return;

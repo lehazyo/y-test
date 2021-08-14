@@ -5,7 +5,7 @@
   width: 20%;
   padding: 10px;
   margin: 0 -1px -1px 0;
-  border: 1px solid $gray-mid;
+  border: 1px solid $black-05;
 }
 
 .book-preview--info {
@@ -18,9 +18,12 @@
   color: $black;
 }
 
-.book-preview--authors {
-  margin-top: 8px;
-  font-size: 10px;
-  font-style: italic;
-  color: $gray-mid;
+@media (hover: hover) {
+  .book-preview--wrapper {
+    cursor: pointer;
+    &:hover {
+      background-color: $black-05;
+      border: 1px solid $black-1;
+    }
+  }
 }
