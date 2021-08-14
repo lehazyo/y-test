@@ -1,0 +1,36 @@
+@import './_palette.scss';
+
+html, body {
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  height: 100%;
+  font-family: Arial, sans-serif;
+}
+
+#root {
+  height: 100%;
+}
+
+.app--wrapper {
+  display: flex;
+  justify-content: center;
+  height: 100%;
+  background-color: $orange-1;
+}
+
+.main-block--wrapper {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  align-items: flex-start;
+  max-width: 90%;
+  padding: 12px 20px;
+  background-color: $white; 
+  box-shadow: 0 0 20px $black-1;
+}
+
+.main-block--header {
+  margin: 0 auto 20px auto;
+  font-size: 30px;
+}

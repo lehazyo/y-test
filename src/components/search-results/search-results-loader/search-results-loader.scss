@@ -1,0 +1,8 @@
+.search-results-loader--wrapper {
+  overflow: hidden;
+}
+
+.search-results-loader--wrapper::before {
+  content: "Загрузка...";
+  display: block;
+}

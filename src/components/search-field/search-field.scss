@@ -1,0 +1,44 @@
+@import '../../palette';
+
+.search-field--wrapper {
+  display: flex;
+  flex-grow: 1;
+  max-width: 500px;
+  margin: 0 auto;
+  background-color: $white;
+  border: 1px solid $gray-mid;
+  border-radius: 24px;
+  overflow: hidden;
+}
+
+.search-field--input {
+  height: 48px;
+  flex-grow: 1;
+  padding: 0 16px;
+  border: 0;
+  background-color: transparent;
+  font-size: 18px;
+  outline: none;
+}
+
+.search-field--submit {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 64px;
+  border: 0;
+  background-color: transparent;
+  background-color: $black-1;
+  transition: 0.2s ease-in-out;
+  cursor: pointer;
+}
+
+.search-field--submit:hover {
+  background-color: $black-05;
+}
+
+.search-field--icon {
+  width: 24px;
+  height: 24px;
+  fill: $gray-mid;
+}
