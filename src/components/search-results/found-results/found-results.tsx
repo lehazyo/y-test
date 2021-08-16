@@ -8,7 +8,7 @@ import { declinationByNumber } from '../../../utils/declination-by-number';
 import Modal from 'react-responsive-modal';
 
 export interface FoundResultsProps {
-  searchQuery: string;
+  previousSearch?: string;
   foundResults: SearchFetchBook[];
   totalResults: number;
 }
@@ -89,7 +89,7 @@ export class FoundResults extends React.Component<FoundResultsProps, FoundResult
       + ' '
       + declinationByNumber(this.props.totalResults, ['результат', 'результата', 'результатов'])
       + ' по запросу «'
-      + this.props.searchQuery
+      + this.props.previousSearch
       + '»';
 
     return (

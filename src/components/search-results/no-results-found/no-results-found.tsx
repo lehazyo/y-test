@@ -2,7 +2,7 @@ import React, { FC } from 'react';
 import './no-results-found.scss';
 
 export interface NoResultsFoundProps {
-  searchQuery: string;
+  searchQuery?: string;
 }
 
 export const NoResultsFound: FC<NoResultsFoundProps> = ({

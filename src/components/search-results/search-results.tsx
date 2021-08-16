@@ -95,7 +95,7 @@ export class SearchResults extends React.Component<SearchResultsProps, SearchRes
       ? <NoResultsFound searchQuery={this.props.searchQuery} />
       : (
         <FoundResults
-          searchQuery={this.props.searchQuery}
+          previousSearch={this.state.previousSearch}
           foundResults={this.state.foundResults}
           totalResults={this.state.totalResults}
         />

@@ -1,12 +1,27 @@
 import React, { FC } from 'react';
 import { ReactComponent as IcSearch } from '../../icons/magnifying-glass.svg';
+import { connect, ConnectedProps } from 'react-redux';
+import { ActionCreator } from '../../redux/actions';
 import './search-field.scss';
+import { ReduxDispatch, ReduxState } from '../../redux/reducer';
 
-export interface SearchFieldProps {
-  performSearch: (query: string) => void;
+const mapState = (state: ReduxState) => ({
+  searchQuery: state.searchQuery,
+});
+
+const mapDispatch = (dispatch: ReduxDispatch) => ({
+  setSearchQuery(searchQuery: string) {
+    dispatch(ActionCreator.setSearchQuery(searchQuery));
+  }
+});
+
+const connector = connect(mapState, mapDispatch);
+
+export interface SearchFieldProps extends ConnectedProps<typeof connector> {
+  setSearchQuery: (searchQuery: string) => void;
 }
 
-export const SearchField: FC<SearchFieldProps> = ({ performSearch }) => {
+const SearchField: FC<SearchFieldProps> = ({ setSearchQuery }) => {
   let searchTimeout: NodeJS.Timeout;
   const searchTimeoutDelay = 1000;
 
@@ -17,7 +32,7 @@ export const SearchField: FC<SearchFieldProps> = ({ performSearch }) => {
     searchTimeout = setTimeout(
       () => {
         if (inputRef.current !== null) {
-          performSearch(inputRef.current.value)
+          setSearchQuery(inputRef.current.value)
         }
       },
       searchTimeoutDelay,
@@ -39,4 +54,6 @@ export const SearchField: FC<SearchFieldProps> = ({ performSearch }) => {
       </button>
     </div>
   );
-}
+};
+
+export default connector(SearchField);

@@ -1,0 +1,15 @@
+export enum ActionType {
+  SET_SEARCH_QUERY = 'SET_SEARCH_QUERY',
+};
+
+export type ReduxAction = {
+  type: ActionType;
+  payload: any;
+};
+
+export const ActionCreator = {
+  setSearchQuery: (searchQuery?: string): ReduxAction => ({
+    type: ActionType.SET_SEARCH_QUERY,
+    payload: searchQuery
+  }),
+};
