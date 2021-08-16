@@ -2,13 +2,13 @@ import React, { FC } from 'react';
 import './no-results-found.scss';
 
 export interface NoResultsFoundProps {
-  searchQuery?: string;
+  previousSearch: string;
 }
 
 export const NoResultsFound: FC<NoResultsFoundProps> = ({
-  searchQuery
+  previousSearch
 }) => (
   <div className="no-results-found--wrapper">
-    Результатов по запросу «{searchQuery}» не найдено
+    Результатов по запросу «{previousSearch}» не найдено
   </div>
 );

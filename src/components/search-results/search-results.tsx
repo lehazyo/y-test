@@ -72,6 +72,7 @@ export class SearchResults extends React.Component<SearchResultsProps, SearchRes
       && this.props.searchQuery !== undefined
       && this.props.searchQuery !== '')
     {
+      console.log('query is', this.props.searchQuery);
       this.performSearch(this.props.searchQuery);
     }
   }
@@ -91,8 +92,11 @@ export class SearchResults extends React.Component<SearchResultsProps, SearchRes
     if (this.props.searchQuery === undefined) {
       return <NoSearchPerformedYet />;
     }
+    if (this.state.previousSearch === undefined) {
+      return null;
+    }
     return (!this.state.foundResults.length)
-      ? <NoResultsFound searchQuery={this.props.searchQuery} />
+      ? <NoResultsFound previousSearch={this.state.previousSearch} />
       : (
         <FoundResults
           previousSearch={this.state.previousSearch}
