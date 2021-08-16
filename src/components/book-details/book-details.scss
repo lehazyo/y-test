@@ -12,6 +12,8 @@
 .book-details--title {
   color: $black;
   font-size: 20px;
+  word-break: break-word;
+  word-wrap: break-word;
 }
 
 .book-details--publish-date,
@@ -20,4 +22,6 @@
   margin-top: 8px;
   color: $gray-mid;
   font-size: 14px;
+  word-break: break-word;
+  word-wrap: break-word;
 }

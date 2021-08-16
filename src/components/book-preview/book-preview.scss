@@ -4,8 +4,8 @@
   display: flex;
   width: 20%;
   padding: 10px;
-  margin: 0 -1px -1px 0;
-  border: 1px solid $black-05;
+  border: 3px solid $white;
+  background-color: $black-05;
 }
 
 .book-preview--info {
@@ -16,14 +16,33 @@
   font-size: 16px;
   font-weight: bold;
   color: $black;
+  word-break: break-word;
+  word-wrap: break-word;
 }
 
 @media (hover: hover) {
   .book-preview--wrapper {
     cursor: pointer;
     &:hover {
-      background-color: $black-05;
-      border: 1px solid $black-1;
+      background-color: $black-1;
     }
+  }
+}
+
+@media (max-width: 1360px) and (min-width: 1024px) {
+  .book-preview--wrapper {
+    width: 33%;
+  }
+}
+
+@media (max-width: 1024px) and (min-width: 600px) {
+  .book-preview--wrapper {
+    width: 50%;
+  }
+}
+
+@media (max-width: 600px) {
+  .book-preview--wrapper {
+    width: 100%;
   }
 }

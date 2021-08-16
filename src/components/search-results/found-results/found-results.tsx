@@ -82,15 +82,13 @@ export class FoundResults extends React.Component<FoundResultsProps, FoundResult
   }
 
   render() {
-    const headerText =
-      declinationByNumber(this.props.totalResults, ['Найден', 'Найдено', 'Найдено'])
-      + ' '
-      + this.props.totalResults
-      + ' '
-      + declinationByNumber(this.props.totalResults, ['результат', 'результата', 'результатов'])
-      + ' по запросу «'
-      + this.props.previousSearch
-      + '»';
+    const headerText = `${declinationByNumber(
+        this.props.totalResults,
+        ['Найден', 'Найдено', 'Найдено']
+      )} ${this.props.totalResults} ${declinationByNumber(
+        this.props.totalResults,
+        ['результат', 'результата', 'результатов']
+      )} по запросу «${this.props.previousSearch}»`;
 
     return (
       <section className="found-results--wrapper">

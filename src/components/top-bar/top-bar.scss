@@ -3,7 +3,8 @@
 .top-bar--wrapper {
   display: flex;
   width: 100%;
-  padding: 20px 0 0 0;
+  padding: 20px;
+  box-shadow: 0 5px 10px $black-1;
 }
 
 .top-bar--title-wrapper {
@@ -16,4 +17,23 @@
   flex-shrink: 0;
   margin: 0;
   font-size: 30px;
+}
+
+@media (max-width: 1024px) {
+  .top-bar--wrapper {
+    padding: 10px;
+  }
+  .top-bar--title {
+    font-size: 20px;
+  }
+}
+
+@media (max-width: 560px) {
+  .top-bar--wrapper {
+    flex-direction: column;
+  }
+  .top-bar--title-wrapper {
+    justify-content: center;
+    margin: 0 0 10px 0;
+  }
 }
