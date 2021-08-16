@@ -29,22 +29,29 @@ const SearchField: FC<SearchFieldProps> = ({ setSearchQuery }) => {
 
   const submitSearch = (value: string): void => setSearchQuery(value);
 
+  const handleOnClick = () => {
+    clearTimeout(searchTimeout);
+    if (inputRef.current !== null) {
+      submitSearch(inputRef.current.value);
+    }
+  }
+
+  const checkRefAndSubmit = () => {
+    if (inputRef.current !== null) {
+      submitSearch(inputRef.current.value);
+    }
+  };
+
   const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
     if (event.key === 'Enter' || event.key === 'Return') {
       clearTimeout(searchTimeout);
-      if (inputRef.current !== null) {
-        submitSearch(inputRef.current.value);
-      }
+      checkRefAndSubmit();
     }
   }
 
   const handleOnChange = (): void => {
     clearTimeout(searchTimeout);
-    searchTimeout = setTimeout(() => {
-      if (inputRef.current !== null) {
-        submitSearch(inputRef.current.value);
-      }
-    }, searchTimeoutDelay);
+    searchTimeout = setTimeout(checkRefAndSubmit, searchTimeoutDelay);
   };
 
   return (
@@ -58,7 +65,10 @@ const SearchField: FC<SearchFieldProps> = ({ setSearchQuery }) => {
         onChange={handleOnChange}
         onKeyDown={handleKeyDown}
       />
-      <button className="search-field--submit">
+      <button
+        className="search-field--submit"
+        onClick={handleOnClick}
+      >
         <IcSearch className="search-field--icon" />
       </button>
     </div>
