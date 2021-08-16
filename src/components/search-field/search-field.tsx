@@ -10,7 +10,7 @@ const mapState = (state: ReduxState) => ({
 });
 
 const mapDispatch = (dispatch: ReduxDispatch) => ({
-  setSearchQuery(searchQuery: string) {
+  setSearchQuery(searchQuery?: string) {
     dispatch(ActionCreator.setSearchQuery(searchQuery));
   }
 });
@@ -18,7 +18,7 @@ const mapDispatch = (dispatch: ReduxDispatch) => ({
 const connector = connect(mapState, mapDispatch);
 
 export interface SearchFieldProps extends ConnectedProps<typeof connector> {
-  setSearchQuery: (searchQuery: string) => void;
+  setSearchQuery: (searchQuery?: string) => void;
 }
 
 const SearchField: FC<SearchFieldProps> = ({ setSearchQuery }) => {
@@ -27,16 +27,24 @@ const SearchField: FC<SearchFieldProps> = ({ setSearchQuery }) => {
 
   const inputRef = React.createRef<HTMLInputElement>();
 
+  const submitSearch = (value: string): void => setSearchQuery(value);
+
+  const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
+    if (event.key === 'Enter' || event.key === 'Return') {
+      clearTimeout(searchTimeout);
+      if (inputRef.current !== null) {
+        submitSearch(inputRef.current.value);
+      }
+    }
+  }
+
   const handleOnChange = (): void => {
     clearTimeout(searchTimeout);
-    searchTimeout = setTimeout(
-      () => {
-        if (inputRef.current !== null) {
-          setSearchQuery(inputRef.current.value)
-        }
-      },
-      searchTimeoutDelay,
-    );
+    searchTimeout = setTimeout(() => {
+      if (inputRef.current !== null) {
+        submitSearch(inputRef.current.value);
+      }
+    }, searchTimeoutDelay);
   };
 
   return (
@@ -48,6 +56,7 @@ const SearchField: FC<SearchFieldProps> = ({ setSearchQuery }) => {
         placeholder="Поиск по названию, автору, ISBN"
         ref={inputRef}
         onChange={handleOnChange}
+        onKeyDown={handleKeyDown}
       />
       <button className="search-field--submit">
         <IcSearch className="search-field--icon" />
