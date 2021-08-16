@@ -1,24 +1,34 @@
 import React, { ReactNode } from 'react';
+import { connect, ConnectedProps } from 'react-redux';
+import { ReduxDispatch } from '../../redux/reducer';
+import { ActionCreator } from '../../redux/actions';
 import { NoSearchPerformedYet } from './no-search-performed-yet/no-search-performed-yet';
 import { NoResultsFound } from './no-results-found/no-results-found';
-import { FoundResults } from './found-results/found-results';
+import FoundResults from './found-results/found-results';
 import { SearchFetchBook, SearchFetchResults } from '../../types/types';
-import { SearchResultsLoader } from './search-results-loader/search-results-loader';
 import 'react-responsive-modal/styles.css';
 import './search-results.scss';
 
-export interface SearchResultsProps {
+const mapDispatch = (dispatch: ReduxDispatch) => ({
+  setLoading(isLoading?: boolean) {
+    dispatch(ActionCreator.setLoading(isLoading));
+  }
+});
+
+const connector = connect(null, mapDispatch);
+
+export interface SearchResultsProps extends ConnectedProps<typeof connector> {
   searchQuery?: string;
+  setLoading: (isLoading?: boolean) => void;
 }
 
 export interface SearchResultsState {
   previousSearch?: string;
-  isSearching: boolean;
   foundResults: SearchFetchBook[];
   totalResults: number;
 }
 
-export class SearchResults extends React.Component<SearchResultsProps, SearchResultsState> {
+class SearchResults extends React.Component<SearchResultsProps, SearchResultsState> {
   searchQuery?: string;
 
   constructor(props: SearchResultsProps) {
@@ -26,7 +36,6 @@ export class SearchResults extends React.Component<SearchResultsProps, SearchRes
 
     this.state = {
       previousSearch: undefined,
-      isSearching: false,
       foundResults: [],
       totalResults: 0,
     };
@@ -38,9 +47,10 @@ export class SearchResults extends React.Component<SearchResultsProps, SearchRes
 
   performSearch(rawQuery: string): void {
     this.setState({
-      isSearching: true,
       previousSearch: rawQuery,
     });
+
+    this.props.setLoading();
 
     this.fetchBooks(rawQuery);
   }
@@ -57,12 +67,14 @@ export class SearchResults extends React.Component<SearchResultsProps, SearchRes
     fetch(requestUrl)
       .then(response => {
         if (!response.ok) {
+          this.props.setLoading(false);
           throw new Error(response.statusText);
         }
         return response.json();
       })
       .then(data => this.parseSearchResults(data))
       .catch(error => {
+        this.props.setLoading(false);
         throw new Error(error);
       });
   }
@@ -79,16 +91,13 @@ export class SearchResults extends React.Component<SearchResultsProps, SearchRes
 
   parseSearchResults(data: SearchFetchResults) {
     this.setState({
-      isSearching: false,
       foundResults: data.docs,
       totalResults: data.numFound,
     });
+    this.props.setLoading(false);
   }
 
   selectBlockToRender(): ReactNode {
-    if (this.state.isSearching) {
-      return <SearchResultsLoader />;
-    }
     if (this.props.searchQuery === undefined) {
       return <NoSearchPerformedYet />;
     }
@@ -110,3 +119,5 @@ export class SearchResults extends React.Component<SearchResultsProps, SearchRes
     return <section className="search-results--wrapper">{this.selectBlockToRender()}</section>;
   }
 };
+
+export default connector(SearchResults);

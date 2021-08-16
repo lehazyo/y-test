@@ -1,4 +1,7 @@
 import React, { ReactNode } from 'react';
+import { connect, ConnectedProps } from 'react-redux';
+import { ReduxDispatch } from '../../../redux/reducer';
+import { ActionCreator } from '../../../redux/actions';
 import { BookPreview } from '../../book-preview/book-preview';
 import { SearchFetchBook, DetailsFetchBook } from '../../../types/types';
 import { BookDetails } from '../../book-details/book-details';
@@ -7,26 +10,33 @@ import './found-results.scss';
 import { declinationByNumber } from '../../../utils/declination-by-number';
 import Modal from 'react-responsive-modal';
 
-export interface FoundResultsProps {
+const mapDispatch = (dispatch: ReduxDispatch) => ({
+  setLoading(isLoading?: boolean) {
+    dispatch(ActionCreator.setLoading(isLoading));
+  }
+});
+
+const connector = connect(null, mapDispatch);
+
+export interface FoundResultsProps extends ConnectedProps<typeof connector> {
   previousSearch?: string;
   foundResults: SearchFetchBook[];
   totalResults: number;
+  setLoading: (isLoading?: boolean) => void;
 }
 
 export interface FoundResultsState {
   modalOpen: boolean;
   modalContent: ReactNode;
-  isFetching: boolean;
 }
 
-export class FoundResults extends React.Component<FoundResultsProps, FoundResultsState> {
+class FoundResults extends React.Component<FoundResultsProps, FoundResultsState> {
   constructor(props: FoundResultsProps) {
     super(props);
 
     this.state = {
       modalOpen: false,
       modalContent: null,
-      isFetching: false,
     };
   }
 
@@ -45,18 +55,14 @@ export class FoundResults extends React.Component<FoundResultsProps, FoundResult
     fetch(requestUrl)
       .then(response => {
         if (!response.ok) {
-          this.setState({
-            isFetching: false,
-          })
+          this.props.setLoading(false);
           throw new Error(response.statusText);
         }
         return response.json();
       })
       .then(data => this.parseDetails(data, title, author_name, cover))
       .catch(error => {
-        this.setState({
-          isFetching: false,
-        })
+        this.props.setLoading(false);
         throw new Error(error);
       });
   }
@@ -77,8 +83,8 @@ export class FoundResults extends React.Component<FoundResultsProps, FoundResult
           docs={data.docs}
         />
       ),
-      isFetching: false,
     });
+    this.props.setLoading(false);
   }
 
   render() {
@@ -101,9 +107,7 @@ export class FoundResults extends React.Component<FoundResultsProps, FoundResult
               authors={result.author_name}
               cover={result.cover_i}
               onClick={() => {
-                if (this.state.isFetching) {
-                  return;
-                }
+                this.props.setLoading();
                 this.openModalForBook(result.title, result.author_name, result.cover_i);
               }}
             />
@@ -116,3 +120,5 @@ export class FoundResults extends React.Component<FoundResultsProps, FoundResult
     );
   }
 }
+
+export default connector(FoundResults);

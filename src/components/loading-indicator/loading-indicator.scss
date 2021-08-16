@@ -1,0 +1,135 @@
+@import '../../_palette.scss';
+
+.loading-indicator--wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  visibility: hidden;
+  opacity: 0;
+  background-color: $white-5;
+  &.loading {
+    visibility: visible;
+    opacity: 1;
+  }
+}
+
+.loading-indiator--icon-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 240px;
+  height: 240px;
+  border: 10px solid $white;
+  border-radius: 100%;
+  background-color: $orange-1;
+  box-shadow: 0 0 10px $gray-mid;
+  perspective: 600px;
+  perspective-origin: 50% 50%;
+}
+
+.loading-indiator--book-wrapper {
+  position: relative;
+  transform-style: preserve-3d;
+  transform: rotateY(62deg) rotateX(36deg) rotateZ(48deg);
+  transform-origin: 50% 50%;
+  top: 30px;
+}
+
+.loading-indiator--book-cover {
+  position: absolute;
+  width: 90px;
+  height: 120px;
+  transform-origin: 0 50%;
+  &.left {
+    background-color: $green-1;
+    transform: rotate3d(0, 1, 0, 90deg) translateY(-60px) translateX(-90px);
+  }
+  &.right {
+    background-color: $green-2;
+    transform: translateY(-60px) translateX(-90px);
+  }
+}
+
+.loading-indiator--book-page {
+  position: absolute;
+  width: 85px;
+  height: 110px;
+  transform-origin: 0 50%;
+  &::before {
+    content: "";
+    position: absolute;
+    top: 15px;
+    left: 10px;
+    bottom: 10px;
+    right: 10px;
+    background-image: linear-gradient(
+      180deg,
+      $gray-mid 0%,
+      $gray-mid 8%,
+      rgba($black, 0) 8%,
+      rgba($black,0) 20%,
+      $gray-mid 20%,
+      $gray-mid 28%,
+      rgba($black, 0) 28%,
+      rgba($black, 0) 40%,
+      $gray-mid 40%,
+      $gray-mid 48%,
+      rgba($black, 0) 48%,
+      rgba($black, 0) 60%,
+      $gray-mid 60%,
+      $gray-mid 68%,
+      rgba($black, 0) 68%,
+      rgba($black, 0) 80%,
+      $gray-mid 80%,
+      $gray-mid 88%,
+      rgba($black, 0) 88%,
+      rgba($black, 0) 100%,
+    );
+  }
+  &.left {
+    background-color: $white;
+    transform: translateY(-55px) translateX(-85px) translateZ(1px);
+    animation: leftPageAnimation 1s linear infinite;
+  }
+  &.right {
+    background-color: $gray-light;
+    transform: rotate3d(0, 1, 0, 90deg) translateY(-55px) translateX(-85px) translateZ(-1px);
+  }
+  &.middle {
+    background-color: $gray-light;
+    transform: rotate3d(0, 1, 0, 90deg) translateY(-55px) translateX(-85px) translateZ(-1px);
+    animation: middlePageAnimation 1s linear infinite;
+  }
+}
+
+@keyframes middlePageAnimation {
+  0% {
+    background-color: $gray-light;
+    transform: rotate3d(0, 1, 0, 90deg) translateY(-55px) translateX(-85px) translateZ(-1px);
+  }
+  50% {
+    background-color: $white;
+    transform: rotate3d(0, 1, 0, 0deg) translateY(-55px) translateX(-85px) translateZ(1px);
+  }
+  100% {
+    background-color: $white;
+    transform: rotate3d(0, 1, 0, 0deg) translateY(-55px) translateX(-85px) translateZ(1px);
+  }
+}
+
+@keyframes leftPageAnimation {
+  0% {
+    box-shadow: inset 0 0 0 $black-1;
+  }
+  50% {
+    box-shadow: inset -50px 0 20px $black-05;
+  }
+  100% {
+    box-shadow: inset -50px 0 20px $black-05;
+  }
+}

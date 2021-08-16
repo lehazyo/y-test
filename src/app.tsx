@@ -1,7 +1,8 @@
 import React, { FC } from 'react';
 import { connect, ConnectedProps } from 'react-redux';
-import { SearchResults } from './components/search-results/search-results';
+import SearchResults from './components/search-results/search-results';
 import { TopBar } from './components/top-bar/top-bar';
+import LoadingIndicator from './components/loading-indicator/loading-indicator';
 import { ReduxState } from './redux/reducer';
 import './app.scss';
 
@@ -20,6 +21,7 @@ const App: FC<AppProps> = ({ searchQuery }) => (
     <div className="main-block--wrapper">
       <TopBar />
       <SearchResults searchQuery={searchQuery} />
+      <LoadingIndicator />
     </div>
   </div>
 );
