@@ -1,0 +1,25 @@
+{
+  "files": {
+    "main.css": "/static/css/main.27058347.chunk.css",
+    "main.js": "/static/js/main.26061230.chunk.js",
+    "main.js.map": "/static/js/main.26061230.chunk.js.map",
+    "runtime-main.js": "/static/js/runtime-main.11dfdbd0.js",
+    "runtime-main.js.map": "/static/js/runtime-main.11dfdbd0.js.map",
+    "static/css/2.59d623fc.chunk.css": "/static/css/2.59d623fc.chunk.css",
+    "static/js/2.734f293c.chunk.js": "/static/js/2.734f293c.chunk.js",
+    "static/js/2.734f293c.chunk.js.map": "/static/js/2.734f293c.chunk.js.map",
+    "index.html": "/index.html",
+    "static/css/2.59d623fc.chunk.css.map": "/static/css/2.59d623fc.chunk.css.map",
+    "static/css/main.27058347.chunk.css.map": "/static/css/main.27058347.chunk.css.map",
+    "static/js/2.734f293c.chunk.js.LICENSE.txt": "/static/js/2.734f293c.chunk.js.LICENSE.txt",
+    "static/media/magnifying-glass.57a6a33a.svg": "/static/media/magnifying-glass.57a6a33a.svg",
+    "static/media/open-book.a7e63940.svg": "/static/media/open-book.a7e63940.svg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.11dfdbd0.js",
+    "static/css/2.59d623fc.chunk.css",
+    "static/js/2.734f293c.chunk.js",
+    "static/css/main.27058347.chunk.css",
+    "static/js/main.26061230.chunk.js"
+  ]
+}
