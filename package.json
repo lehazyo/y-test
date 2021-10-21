@@ -1,7 +1,7 @@
 {
   "name": "y-test-04",
   "version": "0.1.0",
-  "homepage": "./y-test/build/",
+  "homepage": "/y-test/build/",
   "private": true,
   "dependencies": {
     "node-sass": "^6.0.1",
