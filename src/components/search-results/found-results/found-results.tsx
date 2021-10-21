@@ -50,7 +50,7 @@ class FoundResults extends React.Component<FoundResultsProps, FoundResultsState>
       'publisher',
       'isbn',
     ];
-    const requestUrl = `http://openlibrary.org/search.json?title=${encodedTitle}&fields=${neededFields.join(',')}${encodedAuthorBlock}`;
+    const requestUrl = `https://openlibrary.org/search.json?title=${encodedTitle}&fields=${neededFields.join(',')}${encodedAuthorBlock}`;
 
     fetch(requestUrl)
       .then(response => {

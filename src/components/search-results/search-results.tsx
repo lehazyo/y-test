@@ -63,7 +63,7 @@ class SearchResults extends React.Component<SearchResultsProps, SearchResultsSta
     ];
 
     const encodedQuery = encodeURIComponent(rawQuery);
-    const requestUrl = `http://openlibrary.org/search.json?fields=${neededFields.join(',')}&q=${encodedQuery}`;
+    const requestUrl = `https://openlibrary.org/search.json?fields=${neededFields.join(',')}&q=${encodedQuery}`;
     fetch(requestUrl)
       .then(response => {
         if (!response.ok) {
